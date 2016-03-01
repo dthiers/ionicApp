@@ -31,7 +31,20 @@ angular.module('starter', ['ionic'])
 
   $stateProvider.state('home', {
     url: '/',
-    templateUrl: 'js/partials/home-partial.html'
+    views: {
+      home: {
+        templateUrl: 'js/partials/home-partial.html'
+      }
+    }
+  })
+
+  $stateProvider.state('help', {
+    url: '/help',
+    views: {
+      help: {
+        templateUrl: 'js/partials/test-partial.html'
+      }
+    }
   })
 
 })
