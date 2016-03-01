@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+var application = angular.module('application', ['ionic'])
 
 .run(function($ionicPlatform, $rootScope, $templateCache) {
   $ionicPlatform.ready(function() {
@@ -29,20 +29,63 @@ angular.module('starter', ['ionic'])
 .config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/')
 
-  $stateProvider.state('home', {
-    url: '/',
+  // $stateProvider.state('home', {
+  //
+  //   url: '/',
+  //   views: {
+  //     home: {
+  //       templateUrl: 'js/partials/home-partial.html',
+  //       controller: 'homeCtrl'
+  //     }
+  //   }
+  // })
+
+  $stateProvider.state('todo', {
+    abstract: true,
+    url: '/todo',
     views: {
-      home: {
-        templateUrl: 'js/partials/home-partial.html'
+      todo: {
+        // templateUrl: 'js/partials/todo-partial.html',
+        // controller: 'todoCtrl'
+        template: '<ion-nav-view></ion-nav-view>'
       }
     }
   })
+
+  $stateProvider.state('todo.index', {
+    url: '',
+    templateUrl: 'js/partials/todo-partial.html',
+    controller: 'todosCtrl'
+  })
+
+  $stateProvider.state('todo.detail', {
+    url: '/:todo',
+    templateUrl: 'js/partials/todo-detail-partial.html',
+    controller: 'todoCtrl',
+    resolve: {
+      todo: function($stateParams, todoService) {
+        return todoService.getTodo($stateParams.todo);
+      }
+    }
+  })
+
 
   $stateProvider.state('help', {
     url: '/help',
     views: {
       help: {
-        templateUrl: 'js/partials/test-partial.html'
+        templateUrl: 'js/partials/help-partial.html',
+        controller: 'testCtrl'
+      }
+    }
+  })
+
+  $stateProvider.state('info', {
+    url: '/info',
+    views: {
+      info: {
+        templateUrl: 'js/partials/info-partial.html',
+        controller: 'testCtrl'
       }
     }
   })
