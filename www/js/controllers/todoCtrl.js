@@ -1,4 +1,4 @@
-application.controller('todoCtrl', ['$scope', function(scope, todo) {
+application.controller('todoCtrl', ['$scope', 'todo', function(scope, todo) {
 
   console.log(todo);
 

@@ -61,11 +61,11 @@ var application = angular.module('application', ['ionic'])
   $stateProvider.state('todo.detail', {
     url: "/:todo",
     templateUrl: 'js/partials/todo-detail-partial.html',
-    controller: function ($scope, $stateParams, todoService) {
-        // If we got here from a url of /contacts/42
-        console.log($stateParams.todo);
-        $scope.todo = todoService.getTodo($stateParams.todo);
-        //expect($stateParams).toBe({contactId: "42"});
+    controller: 'todoCtrl',
+    resolve: {
+      todo: function($stateParams, todoService) {
+        return todoService.getTodo($stateParams.todo);
+      }
     }
   })
 
