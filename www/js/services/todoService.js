@@ -1,15 +1,28 @@
 application.factory('todoService', function() {
 
-  var todos = [
-      {title: "Take out the trash", done: true},
-      {title: "Do laundry", done: false},
-      {title: "Start cooking dinner", done: false}
-   ]
+  var todoListService = {
+    todos: [
+        {title: "Take out the trash", done: true},
+        {title: "Do laundry", done: false},
+        {title: "Start cooking dinner", done: false}
+     ]
+  }
+
+  // var todos = [
+  //     {title: "Take out the trash", done: true},
+  //     {title: "Do laundry", done: false},
+  //     {title: "Start cooking dinner", done: false}
+  //  ]
 
   return {
-    todos: todos,
+    todos: todoListService.todos,
     getTodo: function(index) {
-      return todos[index]
+      return todoListService.todos[index]
+    },
+    addTodo: function(todo){
+      todoListService.todos.push(
+        {title: todo, done: false}
+      )
     }
   }
 })

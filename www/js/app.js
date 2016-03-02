@@ -29,17 +29,6 @@ var application = angular.module('application', ['ionic'])
 .config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/')
 
-  // $stateProvider.state('home', {
-  //
-  //   url: '/',
-  //   views: {
-  //     home: {
-  //       templateUrl: 'js/partials/home-partial.html',
-  //       controller: 'homeCtrl'
-  //     }
-  //   }
-  // })
-
   $stateProvider.state('todo', {
     abstract: true,
     url: '/todo',
@@ -70,24 +59,63 @@ var application = angular.module('application', ['ionic'])
   })
 
 
-  $stateProvider.state('help', {
-    url: '/help',
+  $stateProvider.state('add', {
+    url: '/add',
     views: {
-      help: {
-        templateUrl: 'js/partials/help-partial.html',
-        controller: 'testCtrl'
+      add: {
+        templateUrl: 'js/partials/add-partial.html',
+        controller: 'todosCtrl'
       }
     }
   })
 
-  $stateProvider.state('info', {
-    url: '/info',
+  $stateProvider.state('delete', {
+    url: '/delete',
     views: {
-      info: {
-        templateUrl: 'js/partials/info-partial.html',
-        controller: 'testCtrl'
+      delete: {
+        templateUrl: 'js/partials/delete-partial.html',
+        controller: 'todosCtrl'
       }
     }
   })
-
+  // $stateProvider.state('todo', {
+  //   abstract: true,
+  //   url: '/todo',
+  //   views: {
+  //     todo: {
+  //       // templateUrl: 'js/partials/todo-partial.html',
+  //       // controller: 'todoCtrl'
+  //       template: '<ion-nav-view></ion-nav-view>'
+  //     }
+  //   }
+  // }).state('todo.index', {
+  //   url: '',
+  //   templateUrl: 'js/partials/todo-partial.html',
+  //   controller: 'todosCtrl'
+  // }).state('todo.detail', {
+  //   url: "/:todo",
+  //   templateUrl: 'js/partials/todo-detail-partial.html',
+  //   controller: 'todoCtrl',
+  //   resolve: {
+  //     todo: function($stateParams, todoService) {
+  //       return todoService.getTodo($stateParams.todo);
+  //     }
+  //   }
+  // }).state('help', {
+  //   url: '/help',
+  //   views: {
+  //     help: {
+  //       templateUrl: 'js/partials/help-partial.html',
+  //       controller: 'testCtrl'
+  //     }
+  //   }
+  // }).state('info', {
+  //   url: '/info',
+  //   views: {
+  //     info: {
+  //       templateUrl: 'js/partials/info-partial.html',
+  //       controller: 'testCtrl'
+  //     }
+  //   }
+  // })
 })

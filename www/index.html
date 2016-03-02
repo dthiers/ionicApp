@@ -13,12 +13,21 @@
     -->
   </head>
   <body>
-
+    <!-- nav-bar -->
     <ion-nav-bar class="bar-positive">
-      <ion-nav-back-button class="button-clear">
-        <i class="ion-arrow-left-c"></i> Back
-      </ion-nav-back-button>
+
     </ion-nav-bar>
+
+    <!-- where the initial view template will be rendered -->
+    <!-- <ion-nav-view>
+      <ion-view>
+        <ion-content>Hello!</ion-content>
+      </ion-view>
+    </ion-nav-view> -->
+
+
+
+
     <!-- ui-router -->
     <ion-tabs class="tabs-positive tabs-icon-bottom">
       <!-- <ion-tab icon="ion-home" ui-sref="home">
@@ -27,11 +36,11 @@
       <ion-tab icon="ion-checkmark" ui-sref="todo">
         <ion-nav-view name="todo"></ion-nav-view>
       </ion-tab>
-       <ion-tab icon="ion-help" ui-sref="help">
-         <ion-nav-view name="help"></ion-nav-view>
+       <ion-tab icon="ion-plus" ui-sref="add">
+         <ion-nav-view name="add"></ion-nav-view>
        </ion-tab>
-       <ion-tab icon="ion-ionic" ui-sref="info">
-         <ion-nav-view name="info"></ion-nav-view>
+       <ion-tab icon="ion-ios-trash-outline" ui-sref="delete">
+         <ion-nav-view name="delete"></ion-nav-view>
        </ion-tab>
      </ion-tabs>
 
@@ -52,7 +61,6 @@
     <script src="js/services/todoService.js"></script>
 
     <!-- Controllers -->
-    <script src="js/controllers/homeCtrl.js"></script>
     <script src="js/controllers/todoCtrl.js"></script>
     <script src="js/controllers/todosCtrl.js"></script>
     <script src="js/controllers/testCtrl.js"></script>
