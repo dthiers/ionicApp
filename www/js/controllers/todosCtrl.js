@@ -1,18 +1,24 @@
-application.controller('todosCtrl', ['$scope', 'todoService', '$state', function(scope, todoService, $state) {
+application.controller('todosCtrl', ['$scope', 'todoService', '$state', 'localStorageService', function(scope, todoService, $state, localStorageService) {
 
-  scope.todos = todoService.todos;
+  scope.todos = todoService.getAllTodos();
 
   scope.shouldShowDelete = true;
 
-  scope.newTodo = "";
-
   scope.addToTodos = function(todo){
-    if (todo.length > 0){
+    if (todo.username.length > 0 && todo.title.length > 0){
       todoService.addTodo(todo);
+
+      localStorageService.setObject(todo.username, {title: todo.title});
       scope.todos = todoService.todos;
-      scope.newTodo = "";
       $state.go("todo.index");
     }
+  }
+
+  scope.clearLocalStorage = function(){
+    localStorageService.clear();
+  }
+  scope.logLocalStorage = function(){
+    localStorageService.log();
   }
 
 }])

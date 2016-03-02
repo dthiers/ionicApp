@@ -1,8 +1,14 @@
 <ion-view title="Add todo">
   <ion-content>
+    <!-- Username -->
     <label class="item item-input">
-      <span class="input-label">Todo</span>
-      <input type="Text" ng-model="newTodo" placeholder="new todo">
+      <span class="input-label">Username</span>
+      <input type="Text" ng-model="newTodo.username" placeholder="Username">
+    </label>
+    <!-- Title -->
+    <label class="item item-input">
+      <span class="input-label">Title</span>
+      <input type="Text" ng-model="newTodo.title" placeholder="new todo">
     </label>
     <button class="button button-full button-positive" ng-click="addToTodos(newTodo)">
       Add to todo list

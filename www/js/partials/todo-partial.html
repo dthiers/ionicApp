@@ -16,5 +16,11 @@
         <span ng-class="{done: todo.done}">{{todo.title}}</span>
       </ion-item>
     </ion-list>
+    <button class="button button-full button-positive" ng-click="clearLocalStorage()">
+      Clear localStorageService
+    </button>
+    <button class="button button-full button-positive" ng-click="logLocalStorage()">
+      Log localStorageService
+    </button>
   </ion-content>
 </ion-view>

@@ -3,9 +3,13 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var application = angular.module('application', ['ionic'])
 
-.run(function($ionicPlatform, $rootScope, $templateCache) {
+
+var db = null;
+
+var application = angular.module('application', ['ionic', 'ngCordova'])
+
+.run(function($ionicPlatform, $rootScope, $templateCache, $cordovaSQLite) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -23,6 +27,14 @@ var application = angular.module('application', ['ionic'])
     $rootScope.$on('$viewContentLoaded', function(){
       $templateCache.removeAll();
     });
+
+    // DATABASE
+
+
+    db = window.openDatabase('todolist', '1.0', 'database for todos', 2 * 1024 * 1024);
+
+    // DATABASE
+
   });
 })
 
