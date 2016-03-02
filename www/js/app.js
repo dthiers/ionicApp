@@ -27,6 +27,14 @@ var application = angular.module('application', ['ionic', 'ngCordova'])
     $rootScope.$on('$viewContentLoaded', function(){
       $templateCache.removeAll();
     });
+
+    // DATABASE
+
+
+    //db = window.openDatabase('todolist', '1.0', 'database for todos', 2 * 1024 * 1024);
+
+    // DATABASE
+
   });
 })
 

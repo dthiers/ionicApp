@@ -1,6 +1,7 @@
 application.controller('todosCtrl', ['$scope', 'todoService', '$state', 'localStorageService', '$cordovaSQLite', function(scope, todoService, $state, localStorageService, $cordovaSQLite) {
 
-  db = window.openDatabase('todolist', '1.0', 'database for todos', 2 * 1024 * 1024);
+  //db = window.openDatabase('todolist', '1.0', 'database for todos', 2 * 1024 * 1024);
+  db = $cordovaSQLite.openDB({name : "todolist"});
 
   scope.todos = [];
 
