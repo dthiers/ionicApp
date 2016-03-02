@@ -27,14 +27,6 @@ var application = angular.module('application', ['ionic', 'ngCordova'])
     $rootScope.$on('$viewContentLoaded', function(){
       $templateCache.removeAll();
     });
-
-    // DATABASE
-
-
-    db = window.openDatabase('todolist', '1.0', 'database for todos', 2 * 1024 * 1024);
-
-    // DATABASE
-
   });
 })
 
@@ -56,7 +48,12 @@ var application = angular.module('application', ['ionic', 'ngCordova'])
   $stateProvider.state('todo.index', {
     url: '',
     templateUrl: 'js/partials/todo-partial.html',
-    controller: 'todosCtrl'
+    controller: 'todosCtrl',
+    resolve: {
+      db: function(){
+        return db;
+      }
+    }
   })
 
   $stateProvider.state('todo.detail', {

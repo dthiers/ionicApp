@@ -1,4 +1,4 @@
-application.factory('todoService', ['webSqlService', function(webSqlService) {
+application.factory('todoService', ['$cordovaSQLite', function($cordovaSQLite) {
 
   var todoListService = {
     // todos: [
@@ -9,12 +9,6 @@ application.factory('todoService', ['webSqlService', function(webSqlService) {
 
   }
 
-  // var todos = [
-  //     {title: "Take out the trash", done: true},
-  //     {title: "Do laundry", done: false},
-  //     {title: "Start cooking dinner", done: false}
-  //  ]
-
   return {
     todos: todoListService.todos,
     getTodo: function(index) {
@@ -24,10 +18,14 @@ application.factory('todoService', ['webSqlService', function(webSqlService) {
       // todoListService.todos.push(
       //   {title: todo.title, username: todo.username, done: false}
       // )
-      webSqlService.insertTodo(todo);
+      //webSqlService.insertTodo(todo);
     },
-    getAllTodos: function(){
-      webSqlService.getAllTodos();
+    getAllTodos: function(db, options){
+      query = "SELECT * FROM todo";
+      $cordovaSQLite.execute(db, query, []).then(function(result) {
+        console.log(result.rows);
+        options.onSuccess(result);
+      })
     }
   }
 }])
