@@ -2,6 +2,7 @@ application.controller('todosCtrl', ['$scope', 'todoService', '$state', 'localSt
 
   //db = window.openDatabase('todolist', '1.0', 'database for todos', 2 * 1024 * 1024);
   db = $cordovaSQLite.openDB({name : "todolist"});
+  $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS todo (username text, title text, time, done integer)', []);
 
   scope.todos = [];
 
