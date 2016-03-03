@@ -29,24 +29,36 @@ application.controller('todosCtrl', ['$scope', 'todoService', '$state', 'localSt
 
   scope.shouldShowDelete = true;
 
-  // Get all todos
-  scope.getTodos = function(){
-    tmp = [];
 
-    //var dfd = $q.defer();
-
-    todoService.getAllTodos(db, {
-      onSuccess: function(result){
-        for(var i = 0; i < result.rows.length; i++){
-          tmp.push(result.rows.item(i));
+  scope.getATodos = function(){
+      var dfd = $q.defer();
+      //scope.todos = [];
+      scope.todos = todoService.getAllTodos(db, {
+        onSuccess: function(result){
+          //promise equivalent van een return
+          dfd.resolve(result);
         }
-        //dfd.resolve(tmp);
-      }
-    })
-    //return dfd.promise;
-    scope.todos = tmp;
+      });
+      //We beloven dat deze dfd later nog een value krijg
+      return dfd.promise
   }
 
+
+
+
+
+
+
+  // Get all todos
+  scope.getTodos = function(){
+    todoService.getAllTodos(db, {
+      onSuccess: function(result){
+        scope.todos = result;
+      }
+    })
+  }
+
+  // Load todos when controller loads
   scope.getTodos();
 
   // Get todo by ID from scope.todos
@@ -58,6 +70,7 @@ application.controller('todosCtrl', ['$scope', 'todoService', '$state', 'localSt
     }
   }
 
+  // Add todo to DB
   scope.addToTodos = function(todo){
     if (todo.username.length > 0 && todo.title.length > 0){
 
@@ -65,12 +78,14 @@ application.controller('todosCtrl', ['$scope', 'todoService', '$state', 'localSt
       todoService.addTodo(db, todo, {
         onSuccess: function(result){
           // TODO: refresh scope.todos
-          scope.getTodos();
+          if(result.rowsAffected > 0){
+            scope.todos = scope.getTodos();
+          }
         }
       });
     }
     // Return to index list with al todos
-    $state.go("todo.index");
+    //$state.go("todo.index");
   }
 
   scope.deleteAllTodos = function(){

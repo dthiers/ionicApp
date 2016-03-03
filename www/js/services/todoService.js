@@ -1,4 +1,4 @@
-application.factory('todoService', ['$cordovaSQLite', function($cordovaSQLite) {
+application.factory('todoService', ['$cordovaSQLite', '$q', function($cordovaSQLite, $q) {
 
   var todoListService = {
     // todos: [
@@ -6,7 +6,13 @@ application.factory('todoService', ['$cordovaSQLite', function($cordovaSQLite) {
     //     // {title: "Do laundry", username: "Dion", done: false},
     //     // {title: "Start cooking dinner", username: "Dion", done: false}
     //  ]
-
+    toArrayObject: function(result){
+      var tmp = [];
+      for(var i = 0; i < result.rows.length; i++){
+        tmp.push(result.rows.item(i));
+      }
+      return tmp;
+    }
   }
 
   return {
@@ -29,13 +35,15 @@ application.factory('todoService', ['$cordovaSQLite', function($cordovaSQLite) {
       query = "SELECT rowid AS id, * FROM todo";
       $cordovaSQLite.execute(db, query, []).then(function(result) {
         //console.log(result.rows);
-        options.onSuccess(result);
+        var def = $q.defer();
+        def.resolve(options.onSuccess(todoListService.toArrayObject(result)));
+        return def.promise;
       })
     },
     deleteAllTodos: function(db, options){
       query = "DELETE FROM todo WHERE rowid > 0";
       $cordovaSQLite.execute(db, query, []).then(function(result){
-        options.onSuccess(result);
+        options.onSuccess(todoListService.toArrayObject(result));
       })
     }
   }
