@@ -9,7 +9,7 @@
     <ion-list>
       <ion-item ng-repeat="todo in todos | filter:search"
         class="item item-icon-right"
-        ui-sref="todo.detail({todo: $index})">
+        ui-sref="todo.detail({todo: todo.id})">
         <ion-delete-button class="ion-minus-circled"
                        ng-click="todos.splice($index, 1)">
         </ion-delete-button>
@@ -21,6 +21,9 @@
     </button>
     <button class="button button-full button-positive" ng-click="logLocalStorage()">
       Log localStorageService
+    </button>
+    <button class="button button-full button-positive" ng-click="deleteAllTodos()">
+      Delete all todos from db
     </button>
   </ion-content>
 </ion-view>

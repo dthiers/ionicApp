@@ -10,20 +10,31 @@ application.factory('todoService', ['$cordovaSQLite', function($cordovaSQLite) {
   }
 
   return {
-    todos: todoListService.todos,
-    getTodo: function(index) {
-      return todoListService.todos[index]
+    //todos: todoListService.todos,
+    getTodo: function(db, id, options) {
+      console.log("todoService id: " + id);
+      query = "SELECT rowid AS id, * FROM todo WHERE rowid = ?";
+      $cordovaSQLite.execute(db, query, [id]).then(function(result){
+        options.onSuccess(result);
+      })
     },
-    addTodo: function(todo){
-      // todoListService.todos.push(
-      //   {title: todo.title, username: todo.username, done: false}
-      // )
-      //webSqlService.insertTodo(todo);
+    addTodo: function(db, todo, options){
+      query = "INSERT INTO todo (username, title, time, done) VALUES (?, ?, ?, ?)";
+      $cordovaSQLite.execute(db, query, [todo.username, todo.title, new Date(), 0]).then(function(result){
+        console.log("INSERT ID -> " + result.insertId);
+        options.onSuccess(result);
+      })
     },
     getAllTodos: function(db, options){
-      query = "SELECT * FROM todo";
+      query = "SELECT rowid AS id, * FROM todo";
       $cordovaSQLite.execute(db, query, []).then(function(result) {
-        console.log(result.rows);
+        //console.log(result.rows);
+        options.onSuccess(result);
+      })
+    },
+    deleteAllTodos: function(db, options){
+      query = "DELETE FROM todo WHERE rowid > 0";
+      $cordovaSQLite.execute(db, query, []).then(function(result){
         options.onSuccess(result);
       })
     }
