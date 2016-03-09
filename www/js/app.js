@@ -70,21 +70,28 @@ var application = angular.module('application', ['ionic', 'ngCordova'])
     controller: 'todoCtrl',
     resolve: {
       todo: function($stateParams, todoService, $q) {
-        var dfd = $q.defer();
-
+        var def = $q.defer();
         todoService.getTodo(db, $stateParams.todo, {
           onSuccess: function(result){
-            var todo = [];
-            for(var i = 0; i < result.rows.length; i++){
-              todo.push(result.rows.item(i));
-            }
-
-            //promise equivalent van een return
-            dfd.resolve(todo[0]);
+            def.resolve(result[0]);
           }
-        });
-        //We beloven dat deze dfd later nog een value krijg
-        return dfd.promise
+        })
+        return def.promise;
+        // var dfd = $q.defer();
+        //
+        // todoService.getTodo(db, $stateParams.todo, {
+        //   onSuccess: function(result){
+        //     var todo = [];
+        //     for(var i = 0; i < result.rows.length; i++){
+        //       todo.push(result.rows.item(i));
+        //     }
+        //
+        //     //promise equivalent van een return
+        //     dfd.resolve(todo[0]);
+        //   }
+        // });
+        // //We beloven dat deze dfd later nog een value krijg
+        // return dfd.promise
       }
     }
   })

@@ -8,7 +8,7 @@
         class="item item-icon-right"
         ui-sref="todo.detail({todo: $index})">
         <ion-delete-button class="ion-minus-circled"
-                       ng-click="todos.splice($index, 1)">
+                       ng-click="deleteTodo(todo.id)">
         </ion-delete-button>
         <span ng-class="{done: todo.done}">{{todo.title}}</span>
       </ion-item>
